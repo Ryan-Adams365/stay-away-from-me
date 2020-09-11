@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/widgets/prompt.dart';
 import 'package:stay_away_from_me/widgets/proximity_display.dart';
-import 'package:stay_away_from_me/widgets/scan_button.dart';
-
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   
-  static final int count = 0;
   static final String title = 'Stay Away From Me';  
   
   bool isScanning = false;
@@ -20,40 +17,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          centerTitle: true,
+      appBar: AppBar(
+        title: Text(title),
+        centerTitle: true,
+      ),
+      floatingActionButton: SizedBox(
+        width: 80,
+        height: 80,
+        child: FloatingActionButton(
+          child: Text(decideButtonText(isScanning), textScaleFactor: 1.3,),
+          onPressed: () {
+            setState( () {
+              isScanning = toggleScan(isScanning);
+            });
+          }
         ),
-        floatingActionButton: SizedBox(
-          width: 80,
-          height: 80,
-          child: FloatingActionButton(
-            child: Text(decideButtonText(isScanning), textScaleFactor: 1.3,),
-            onPressed: () {
-              setState( () {
-                isScanning = toggleScan(isScanning);
-              });
-            }
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: Padding(
-          padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05, true), right: getPaddingAmount(context, 0.05, true)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('$count Nearby Devices', textScaleFactor: 1.5),
-              Padding(
-                padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
-              ),
-              isScanning ? ProximityDisplay() : Prompt(),
-            ],
-          ),
-        )
-      ); 
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: Padding(
+        padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05, true), right: getPaddingAmount(context, 0.05, true)),
+        child: isScanning ? ProximityDisplay() : Prompt(),
+      )
+    ); 
   }
 }
 
 String decideButtonText(bool isScanning) => isScanning ? 'Stop' : 'Scan';
-
 bool toggleScan(bool isScanning) => isScanning ? false : true; 
