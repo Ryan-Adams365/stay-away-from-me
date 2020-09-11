@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
+import 'package:stay_away_from_me/widgets/prompt.dart';
 import 'package:stay_away_from_me/widgets/proximity_display.dart';
 import 'package:stay_away_from_me/widgets/scan_button.dart';
 
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
               ),
-              ProximityDisplay(),
+              isScanning ? ProximityDisplay() : Prompt(),
             ],
           ),
         )
