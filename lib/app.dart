@@ -3,21 +3,24 @@ import 'package:stay_away_from_me/screens/home_screen.dart';
 
 class App extends StatelessWidget {
   
-  static final String title = 'Stay Away From Me';
-
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          centerTitle: true,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.orange[800],
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          foregroundColor: Colors.white, 
+          backgroundColor: Colors.orange[800],
         ),
-        floatingActionButton: FloatingActionButton(child: Text('Start')),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: HomeScreen()
-    )
+        buttonColor: Colors.orange[800],
+      ),
+      home: HomeScreen(),
     );
   }
 }
+
+String decideButtonText(bool isScanning) => isScanning ? 'Scan' : 'Stop';
+
+bool toggleScan(bool isScanning) => isScanning ? false : true; 
