@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
+import 'package:stay_away_from_me/widgets/proximity_display.dart';
 
 class HomeScreen extends StatelessWidget {
   
@@ -8,22 +9,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05), right: getPaddingAmount(context, 0.05)),
+      padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05, true), right: getPaddingAmount(context, 0.05, true)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('${count} Nearby Devices', textScaleFactor: 1.5),
           Padding(
-            padding: EdgeInsets.all(10)
+            padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
           ),
-          Flexible(
-            child: FractionallySizedBox(
-              widthFactor: 1.0,
-              heightFactor: 0.8,
-              child: Placeholder(),
-              ),
-            )
-
+          ProximityDisplay(),
         ],
       ),
     );
