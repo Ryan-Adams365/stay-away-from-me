@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stay_away_from_me/app.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/widgets/proximity_display.dart';
+import 'package:stay_away_from_me/widgets/scan_button.dart';
 
 class HomeScreen extends StatelessWidget {
   
@@ -16,17 +16,7 @@ class HomeScreen extends StatelessWidget {
           title: Text(title),
           centerTitle: true,
         ),
-        floatingActionButton: SizedBox(
-            width: 80,
-            height: 80,
-            child: FloatingActionButton(
-              child: Text(decideButtonText(isScanning), textScaleFactor: 1.3,),
-              onPressed: () {
-                isScanning = toggleScan(isScanning);
-                print('Toggling isScanning: ${isScanning}');
-              },
-            ),
-          ),
+        floatingActionButton: ScanButton(isScanning: isScanning),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Padding(
           padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05, true), right: getPaddingAmount(context, 0.05, true)),
