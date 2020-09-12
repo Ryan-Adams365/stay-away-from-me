@@ -19,10 +19,9 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
 
     return Center(
       child: StreamBuilder<List<ScanResult>>(
-        initialData: [],
         stream: FlutterBlue.instance.scanResults,
         builder: (context, snapshot) {
-          if(hasErrors(snapshot)){
+          if(snapshot.hasError || !(snapshot.hasData)){
             return Center(child: CircularProgressIndicator());
           } 
           return Column(
@@ -46,5 +45,3 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
     );
   }
 }
-
-bool hasErrors(AsyncSnapshot<List<ScanResult>> snapshot) => snapshot.hasError ? true : false;
