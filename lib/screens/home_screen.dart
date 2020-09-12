@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final Translations translations = Translations(locale: Localizations.localeOf(context));
+
     final String title = translations.getTranslation('appTitle');
 
     return Scaffold(
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 80,
           child: FloatingActionButton(
               child: Text(
-                decideButtonText(isScanning),
+                decideButtonText(isScanning, translations),
                 textScaleFactor: 1.3,
               ),
               onPressed: () {
