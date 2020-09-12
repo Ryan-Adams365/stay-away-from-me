@@ -15,11 +15,14 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
   Widget build(BuildContext context) {
     
     final Translations translations = Translations(locale: Localizations.localeOf(context));
-    FlutterBlue.instance.startScan(timeout: Duration(minutes: 1));
+    FlutterBlue flutterBlue = FlutterBlue.instance;
+
+    flutterBlue.startScan(timeout: Duration(seconds: 4));
+        // flutterBlue.startScan(timeout: Duration(minutes: 1));
 
     return Center(
       child: StreamBuilder<List<ScanResult>>(
-        stream: FlutterBlue.instance.scanResults,
+        stream: flutterBlue.scanResults,
         builder: (context, snapshot) {
           if(snapshot.hasError || !(snapshot.hasData)){
             return Center(child: CircularProgressIndicator());
