@@ -39,6 +39,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Bluetooth access required for Stay Away From Me.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth access required for Stay Away From Me.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
