@@ -9,38 +9,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
-  static final String title = 'Stay Away From Me';  
-  
+  static final String title = 'Stay Away From Me';
+
   bool isScanning = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-      ),
-      floatingActionButton: SizedBox(
-        width: 80,
-        height: 80,
-        child: FloatingActionButton(
-          child: Text(decideButtonText(isScanning), textScaleFactor: 1.3,),
-          onPressed: () {
-            setState( () {
-              isScanning = toggleScan(isScanning);
-            });
-          }
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Image.asset('assets/images/safmpng.png'),
+          ),
+          title: Text(title),
+          centerTitle: true,
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: Padding(
-        padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05, true), right: getPaddingAmount(context, 0.05, true)),
-        child: isScanning ? ProximityDisplay() : Prompt(),
-      )
-    ); 
+        floatingActionButton: SizedBox(
+          width: 80,
+          height: 80,
+          child: FloatingActionButton(
+              child: Text(
+                decideButtonText(isScanning),
+                textScaleFactor: 1.3,
+              ),
+              onPressed: () {
+                setState(() {
+                  isScanning = toggleScan(isScanning);
+                });
+              }),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: Padding(
+          padding: EdgeInsets.only(
+              left: getPaddingAmount(context, 0.05, true),
+              right: getPaddingAmount(context, 0.05, true)),
+          child: isScanning ? ProximityDisplay() : Prompt(),
+        ));
   }
 }
 
 String decideButtonText(bool isScanning) => isScanning ? 'Stop' : 'Scan';
-bool toggleScan(bool isScanning) => isScanning ? false : true; 
+bool toggleScan(bool isScanning) => isScanning ? false : true;
