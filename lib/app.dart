@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:stay_away_from_me/screens/Bluetooth_Off_Screen.dart';
 import 'package:stay_away_from_me/screens/home_screen.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +18,17 @@ class App extends StatelessWidget {
         ),
         buttonColor: Colors.orange[800],
       ),
-      home: HomeScreen(),
+      home: StreamBuilder<BluetoothState>  (
+        initialData: BluetoothState.unknown,
+        stream: FlutterBlue.instance.state,
+        builder: (context, snapshot) {
+          final state = snapshot.data;
+          if (state == BluetoothState.on) {
+            return HomeScreen();
+          }
+          return BluetoothOffScreen(state: state);
+        }
+      )
     );
   }
 }
