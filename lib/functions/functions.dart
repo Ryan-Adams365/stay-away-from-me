@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'dart:math';
 
 /*
   Function: getPaddingAmount
@@ -19,7 +19,9 @@ int getNumNearbyDevices(){
   return 0;
 }
 
-// function stub
-double convertToDistance(double value){
-  return 0;
+double convertToDistance(double txPowerLevel){
+  double measuredPower = -69.0;
+  int N = 2;
+
+  return pow(10, ((measuredPower-txPowerLevel)/(10*N)));
 }

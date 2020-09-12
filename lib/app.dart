@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:stay_away_from_me/screens/Bluetooth_Off_Screen.dart';
+import 'package:stay_away_from_me/screens/bluetooth_off_screen.dart';
 import 'package:stay_away_from_me/screens/home_screen.dart';
 
 class App extends StatelessWidget {
