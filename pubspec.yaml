@@ -8,11 +8,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
   cupertino_icons: ^0.1.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  liquid_progress_indicator: ^0.3.2
+  vibrate: ^0.0.4
 
 flutter:
   uses-material-design: true

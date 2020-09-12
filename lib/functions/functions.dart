@@ -13,3 +13,13 @@ double getPaddingAmount(BuildContext context, double factor, bool usingWidth) {
     usingWidth ? padding = screenSize.width * factor : padding = screenSize.height * factor;  
     return padding;
 } 
+
+// function stub
+int getNumNearbyDevices(){
+  return 0;
+}
+
+// function stub
+double convertToDistance(double value){
+  return 0;
+}
