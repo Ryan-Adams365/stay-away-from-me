@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
+import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/widgets/prompt.dart';
 import 'package:stay_away_from_me/widgets/proximity_display.dart';
 
@@ -9,12 +10,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static final String title = 'Stay Away From Me';
 
   bool isScanning = false;
 
   @override
   Widget build(BuildContext context) {
+    final Translations translations = Translations(locale: Localizations.localeOf(context));
+    final String title = translations.getTranslation('appTitle');
+
     return Scaffold(
         appBar: AppBar(
           leading: Padding(
@@ -48,5 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-String decideButtonText(bool isScanning) => isScanning ? 'Stop' : 'Scan';
-bool toggleScan(bool isScanning) => isScanning ? false : true;
+
+String decideButtonText(bool isScanning, Translations translations) 
+  => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
+bool toggleScan(bool isScanning) => isScanning ? false : true; 
