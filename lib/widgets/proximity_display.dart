@@ -5,6 +5,11 @@ import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/widgets/progress.dart';
 
 class ProximityDisplay extends StatefulWidget {
+  
+  // FlutterBlue flutterBlue;
+  Stream<List<ScanResult>>  results;
+  ProximityDisplay({this.results});
+
   @override
   _ProximityDisplayState createState() => _ProximityDisplayState();
 }
@@ -15,14 +20,11 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
   Widget build(BuildContext context) {
     
     final Translations translations = Translations(locale: Localizations.localeOf(context));
-    FlutterBlue flutterBlue = FlutterBlue.instance;
-
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
-        // flutterBlue.startScan(timeout: Duration(minutes: 1));
+    Stream<List<ScanResult>> results = widget.results;
 
     return Center(
       child: StreamBuilder<List<ScanResult>>(
-        stream: flutterBlue.scanResults,
+        stream: results,
         builder: (context, snapshot) {
           if(snapshot.hasError || !(snapshot.hasData)){
             return Center(child: CircularProgressIndicator());
