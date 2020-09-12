@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/screens/home_screen.dart';
 
 class App extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,7 +9,7 @@ class App extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.orange[800],
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white, 
+          foregroundColor: Colors.white,
           backgroundColor: Colors.orange[800],
         ),
         buttonColor: Colors.orange[800],
@@ -23,4 +21,4 @@ class App extends StatelessWidget {
 
 String decideButtonText(bool isScanning) => isScanning ? 'Scan' : 'Stop';
 
-bool toggleScan(bool isScanning) => isScanning ? false : true; 
+bool toggleScan(bool isScanning) => isScanning ? false : true;
