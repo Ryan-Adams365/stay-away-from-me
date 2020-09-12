@@ -8,7 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
+  flutter_blue: ^0.7.2  
   cupertino_icons: ^0.1.3
 
 dev_dependencies:
