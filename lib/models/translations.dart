@@ -42,7 +42,7 @@ class Translations{
       'meters': 'метры' 
     },
 
-    'in': {
+    'dap': {
       'appTitle' : 'मुझसे दूर रहो',
       'stop': 'रुकें',
       'scan': 'स्कैन',
