@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/widgets/prompt.dart';
@@ -18,7 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final Translations translations = Translations(locale: Localizations.localeOf(context));
 
     final String title = translations.getTranslation('appTitle');
-
+    FlutterBlue flutterBlue = FlutterBlue.instance;
+    
     return Scaffold(
         appBar: AppBar(
           leading: Padding(
@@ -38,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () {
                 setState(() {
-                  isScanning = toggleScan(isScanning);
+                  isScanning = toggleScan(isScanning, flutterBlue);
                 });
               }),
         ),
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.only(
               left: getPaddingAmount(context, 0.05, true),
               right: getPaddingAmount(context, 0.05, true)),
-          child: isScanning ? ProximityDisplay() : Prompt(),
+          child: isScanning ? ProximityDisplay(results: flutterBlue.scanResults) : Prompt(),
         ));
   }
 }
@@ -55,4 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
 String decideButtonText(bool isScanning, Translations translations) 
   => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
-bool toggleScan(bool isScanning) => isScanning ? false : true; 
+
+bool toggleScan(bool isScanning, FlutterBlue flutterBlue){
+  isScanning ? false : true; 
+  if(isScanning){
+    flutterBlue.stopScan();
+    return false;
+  } 
+  flutterBlue.startScan(timeout: Duration(seconds: 4));
+  return true;
+} 
