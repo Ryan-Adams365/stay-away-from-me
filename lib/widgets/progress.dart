@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:vibrate/vibrate.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
@@ -7,27 +8,27 @@ import 'package:stay_away_from_me/models/translations.dart';
 
 class Progress extends StatelessWidget {
   
-  final AsyncSnapshot<double> parentSnapshot;
+  final List<ScanResult> deviceList;
 
-  Progress({this.parentSnapshot});
+  Progress({this.deviceList});
   
   @override
   Widget build(BuildContext context) {
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
 
-    final double signalStrength = getSnapshotData(parentSnapshot);
-    vibrateIfClose(signalStrength);
+    final double closestDistance = getClosestDistance(deviceList);
+    vibrateIfClose(closestDistance);
     return LiquidLinearProgressIndicator(
-      value: signalStrength, 
-      valueColor: AlwaysStoppedAnimation(colorMap(signalStrength)),
+      value: closestDistance, 
+      valueColor: AlwaysStoppedAnimation(colorMap(closestDistance)),
       backgroundColor: Colors.black, 
       borderColor: Colors.black,
       borderWidth: 1.0,
       borderRadius: 12.0,
       direction: Axis.vertical, 
       center: Text(
-        "${translations.getTranslation('distance')} ${convertToDistance(parentSnapshot.data)} ${translations.getTranslation('meters')}"
+        "${translations.getTranslation('distance')} $closestDistance ${translations.getTranslation('meters')}"
       ),
     );
   }
@@ -44,9 +45,16 @@ Color colorMap(double value){
     return Colors.red;
 }
 
-double getSnapshotData(AsyncSnapshot<double> snapshot){
-  if(snapshot.hasData){
-    return snapshot.data;
+double getClosestDistance(List<ScanResult> deviceList){
+  if (deviceList.isNotEmpty){
+    var closestDistance = 999.9;
+    deviceList.forEach((device) {
+      var deviceDistance = convertToDistance(device.advertisementData.txPowerLevel);
+      if (deviceDistance < closestDistance) {
+        closestDistance = deviceDistance;
+      }
+    });
+    return closestDistance;
   }
   return 0.0;
 }

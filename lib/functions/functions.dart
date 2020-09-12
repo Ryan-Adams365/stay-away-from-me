@@ -19,9 +19,9 @@ int getNumNearbyDevices(){
   return 0;
 }
 
-double convertToDistance(double txPowerLevel){
+double convertToDistance(int txPowerLevel){
   double measuredPower = -69.0;
-  int N = 2;
+  double N = 2.0;
 
   return pow(10, ((measuredPower-txPowerLevel)/(10*N)));
 }
