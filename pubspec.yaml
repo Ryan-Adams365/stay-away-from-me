@@ -13,9 +13,15 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  flutter_launcher_icons: "^0.7.3"
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/safmpng.png
-  
+    - assets/images/
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/safmpng.png"
