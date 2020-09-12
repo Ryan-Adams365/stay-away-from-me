@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
+
   bool isScanning = false;
 
   @override
@@ -19,30 +19,38 @@ class _HomeScreenState extends State<HomeScreen> {
     final String title = translations.getTranslation('appTitle');
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-      ),
-      floatingActionButton: SizedBox(
-        width: 80,
-        height: 80,
-        child: FloatingActionButton(
-          child: Text(decideButtonText(isScanning, translations), textScaleFactor: 1.3,),
-          onPressed: () {
-            setState( () {
-              isScanning = toggleScan(isScanning);
-            });
-          }
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Image.asset('assets/images/safmpng.png'),
+          ),
+          title: Text(title),
+          centerTitle: true,
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: Padding(
-        padding: EdgeInsets.only(left: getPaddingAmount(context, 0.05, true), right: getPaddingAmount(context, 0.05, true)),
-        child: isScanning ? ProximityDisplay() : Prompt(),
-      )
-    ); 
+        floatingActionButton: SizedBox(
+          width: 80,
+          height: 80,
+          child: FloatingActionButton(
+              child: Text(
+                decideButtonText(isScanning),
+                textScaleFactor: 1.3,
+              ),
+              onPressed: () {
+                setState(() {
+                  isScanning = toggleScan(isScanning);
+                });
+              }),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: Padding(
+          padding: EdgeInsets.only(
+              left: getPaddingAmount(context, 0.05, true),
+              right: getPaddingAmount(context, 0.05, true)),
+          child: isScanning ? ProximityDisplay() : Prompt(),
+        ));
   }
 }
+
 
 String decideButtonText(bool isScanning, Translations translations) 
   => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
