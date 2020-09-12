@@ -16,6 +16,12 @@ dev_dependencies:
     sdk: flutter
   liquid_progress_indicator: ^0.3.2
   vibrate: ^0.0.4
+  flutter_launcher_icons: "^0.7.3"
+
+flutter_icons:
+  image_path: "assets/images/safmpng.png"
+  android: true
+  ios: true
 
 flutter:
   uses-material-design: true
