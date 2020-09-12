@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/translations.dart';

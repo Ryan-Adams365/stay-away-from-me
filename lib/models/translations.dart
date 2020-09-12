@@ -8,8 +8,11 @@ class Translations{
   final labels = {
     'en': {
       'appTitle' : 'Stay Away From Me',
-      'stop' : 'Stop',
-      'scan' : 'Scan',
+      'stop': 'Stop',
+      'scan': 'Scan',
+      'nearDevs': 'Nearby Devices',
+      'distance': 'Distance',
+      'meters': 'meters' 
     },
   };
 

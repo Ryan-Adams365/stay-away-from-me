@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
+import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/widgets/progress.dart';
 
 class ProximityDisplay extends StatefulWidget {
@@ -14,11 +15,15 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final Translations translations = Translations(locale: Localizations.localeOf(context));
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('${getNumNearbyDevices()} Nearby Devices', textScaleFactor: 1.5),
+          Text('${getNumNearbyDevices()} ${translations.getTranslation('nearDevs')}', textScaleFactor: 1.5),
+
           Padding(
             padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
           ),
