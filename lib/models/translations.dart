@@ -10,7 +10,9 @@ class Translations{
     'es',
     'cn',
     'ru',
-    'dap'
+    'dap',
+    'fr',
+    'ar',
   ];
 
   final labels = {
@@ -82,6 +84,34 @@ class Translations{
       'bluetooth': 'अन्य उपकरणों के लिए स्कैन करने के लिए ब्लूटूथ को सक्षम करना चाहिए',
       'prompt': 'आस-पास के उपकरणों की खोज शुरू करने के लिए, स्कैन दबाएं',
       'welcome': 'मेरे से दूर रहने के लिए आपका स्वागत है!',
+    },
+
+    'fr': {
+      'appTitle': 'Reste Loin De Moi',
+      'stop': 'Arrêtez',
+      'scan': 'Analyse',
+      'nearDevs': 'Appareils à Proximité',
+      'distance': 'Distance',
+      'meters': 'mètres',
+      'scanning': 'Recherche d\'appareils ...',
+      'errorScanning': 'Erreur lors de la recherche de périphériques ...',
+      'bluetooth': 'Doit activer Bluetooth pour rechercher d\'autres appareils',
+      'prompt': 'Pour commencer la recherche d\'appareils à proximité, appuyez sur Scan',
+      'welcome': 'Bienvenue à Reste Loin De Moi!'
+    },
+
+    'ar': {
+      'appTitle' : 'ابق بعيد عني',
+      'stop': 'قف',
+      'scan': 'مسح',
+      'nearDevs': 'الأجهزة القريبة',
+      'distance': 'مسافة',
+      'meters': 'أمتار',
+      'scanning': 'جارٍ البحث عن أجهزة ',
+      'errorScanning': 'خطأ في البحث عن الأجهزة ...',
+      'bluetooth': 'يجب تمكين Bluetooth للبحث عن أجهزة أخرى',
+      'prompt': 'لبدء البحث عن الأجهزة المجاورة ، اضغط على مسح',
+      'welcome': 'مرحبًا بكم في البقاء بعيدًا عني!'
     },
   };
 
