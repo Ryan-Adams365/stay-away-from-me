@@ -70,5 +70,6 @@ class Translations{
   };
 
   String getTranslation(String label) => labels[window.locale.languageCode][label];
+  String getLanguageCode() => window.locale.languageCode;
 }
 

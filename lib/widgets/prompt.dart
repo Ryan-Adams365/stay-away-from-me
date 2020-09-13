@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/screens/home_screen.dart';
 
 class Prompt extends StatefulWidget {
@@ -13,27 +14,39 @@ class _PromptState extends State<Prompt> {
   @override
   Widget build(BuildContext context) {
 
+    final Translations translations = Translations(locale: Localizations.localeOf(context));
+
+    return decideWidget(translations, context);
+  }
+}
+
+Widget decideWidget(final Translations translations, BuildContext context){
+  if(translations.getLanguageCode() == 'en'){
+    
     HomeScreenState homeState = context.findAncestorStateOfType<HomeScreenState>();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         stackedText(),
-        Row(children: [
-          Text('Imperial'),
-          Switch(
-            value: homeState.metricMode,
-            onChanged: (value) => homeState.toggleMetric(value),
-          ),
-          Text('Metric')
-        ],)
-
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: 
+          [
+            Text('Ft'),
+            Switch(
+              value: homeState.metricMode,
+              onChanged: (value) => homeState.toggleMetric(value),
+            ),
+            Text('Meters')
+          ], 
+        )
       ],
     );
+  } else{
+    return Center(child: stackedText(),);
   }
 }
-
-
 
 Stack stackedText(){
   return Stack (
@@ -61,6 +74,6 @@ Stack stackedText(){
           color: Colors.grey[300],
           ),
       ),
-  ],
+    ],
   );
 }
