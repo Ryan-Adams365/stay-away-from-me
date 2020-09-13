@@ -18,11 +18,11 @@ double getPaddingAmount(BuildContext context, double factor, bool usingWidth) {
   Function: convertToDistance
   Description: Converts signal stregnth to distance in meters
 */
-double convertToDistance(int txPowerLevel){
-  double measuredPower = -69.0;
-  double N = 2.0;
+double convertToDistance(int rssi){
+  double measuredPower = -74.0;
+  double N = 3.0;
 
-  return pow(10, ((measuredPower-txPowerLevel)/(10*N)));
+  return pow(10, ((measuredPower-rssi)/(10*N)));
 }
 
 /*
