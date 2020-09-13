@@ -18,7 +18,7 @@ class Progress extends StatelessWidget {
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
     final double minDistance = getMinDistance(deviceList);
-    final double signalStrength = convertDistToStrength(minDistance);
+    final double signalStrength = convertDistToStrength(metersToFt(minDistance));
 
     //vibrateIfClose(minDistance);
     return LiquidLinearProgressIndicator(
