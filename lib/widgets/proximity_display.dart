@@ -6,8 +6,7 @@ import 'package:stay_away_from_me/widgets/progress.dart';
 
 class ProximityDisplay extends StatefulWidget {
   
-  // FlutterBlue flutterBlue;
-  Stream<List<ScanResult>>  results;
+  Stream<List<ScanResult>> results;
   ProximityDisplay({this.results});
 
   @override
