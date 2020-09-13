@@ -14,16 +14,20 @@ class Progress extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
     if(deviceList.isEmpty){
       return Center(child: CircularProgressIndicator());
     } 
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
     final double minDistance = getMinDistance(deviceList);
+
+    final double signalStrength = convertDistToStrength(minDistance, 1.83, 6);
+
     vibrateIfClose(minDistance);
     return LiquidLinearProgressIndicator(
-      value: minDistance, 
-      valueColor: AlwaysStoppedAnimation(colorMap(minDistance)),
+      value: signalStrength, 
+      valueColor: AlwaysStoppedAnimation(colorMap(signalStrength)),
       backgroundColor: Colors.black, 
       borderColor: Colors.black,
       borderWidth: 1.0,
@@ -36,12 +40,12 @@ class Progress extends StatelessWidget {
   }
 }
 
-Color colorMap(double distance){
-  if(distance > 3)
-    return Colors.blue;
-  else if(distance >= 2)
+Color colorMap(double signalStrength){
+  if(signalStrength <= 0.2)
+      return Colors.blue;
+  if(signalStrength <= 0.5)
     return Colors.green;
-  else if(distance >= 1)
+  if(signalStrength <= 0.7)
     return Colors.orange;
   else
     return Colors.red;
@@ -60,18 +64,18 @@ double getMinDistance(List<ScanResult> deviceList){
   return minDistance;
 }
 
-void vibrateIfClose(double distance) async {
-  if(distance < 2){
+void vibrateIfClose(double signalStrength) async {
+  if(signalStrength >= 0.7){
     bool canVibrate = await Vibrate.canVibrate;
     if(canVibrate){
-      if(distance >= 1){
-        final Iterable<Duration> pauses = [
+       if(signalStrength >= 0.8){        
+         final Iterable<Duration> pauses = [
             const Duration(milliseconds: 500),
             const Duration(milliseconds: 1000),
             const Duration(milliseconds: 500),
         ];
         Vibrate.vibrateWithPauses(pauses);
-      } else {
+      } else if (signalStrength >= 0.7){
         Vibrate.vibrate();
       }
     }

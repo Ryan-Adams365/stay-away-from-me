@@ -59,7 +59,6 @@ String decideButtonText(bool isScanning, Translations translations)
   => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
 
 bool toggleScan(bool isScanning, FlutterBlue flutterBlue){
-  isScanning ? false : true; 
   if(isScanning){
     flutterBlue.stopScan();
     return false;
