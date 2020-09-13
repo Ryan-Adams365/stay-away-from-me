@@ -7,6 +7,7 @@ class Device {
   int staleCounter;
 
   Device(int firstRssi, this.id, this.name, this.staleCounter){
+    rssiValues = [];
     addRssiValue(firstRssi);
   }
 
@@ -20,11 +21,11 @@ class Device {
   }
 
   void calcRssiAvg() {
-    var sum;
+    var sum = 0;
     rssiValues.forEach((element) {
       sum += element;
     });
 
-    this.rssiAvg = sum / rssiValues.length;
+    this.rssiAvg = sum ~/ rssiValues.length;
   }
 }
