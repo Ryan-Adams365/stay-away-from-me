@@ -57,3 +57,5 @@ double scaleValue(double val, double lowerBound, double upperBound) {
   }
   return scaled;
 } 
+
+double metersToFt(double distance) => distance * 3.2808;

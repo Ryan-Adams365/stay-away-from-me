@@ -26,7 +26,23 @@ class BluetoothOffScreen extends StatelessWidget {
         padding: EdgeInsets.only(
             left: getPaddingAmount(context, 0.05, true),
             right: getPaddingAmount(context, 0.05, true)),
-        child: Text('Turn on bluetooth!'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: FractionallySizedBox(
+                heightFactor: 0.8,
+                widthFactor: 0.8,
+                child: Image.asset('assets/images/safmpng.png'),
+              )
+            ),
+            
+            Padding(
+              padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+            ),
+            Text(translations.getTranslation('bluetooth'), textScaleFactor: 1.5,),
+          ]
+        )
       )
     );
   }
