@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.only(
               left: getPaddingAmount(context, 0.05, true),
               right: getPaddingAmount(context, 0.05, true)),
-          child: isScanning ? ProximityDisplay(results: flutterBlue.scanResults) : Prompt(),
+          child: isScanning ? ProximityDisplay(results: flutterBlue.scan(allowDuplicates: true)) : Prompt(),
         ));
   }
 }
@@ -63,6 +63,5 @@ bool toggleScan(bool isScanning, FlutterBlue flutterBlue){
     flutterBlue.stopScan();
     return false;
   } 
-  flutterBlue.startScan(timeout: Duration(seconds: 4));
   return true;
 } 
