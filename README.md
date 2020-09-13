@@ -19,6 +19,7 @@ The Stay Away From Me (SAFM) app is a cross platform social distancing mobile ap
 # Launch
 
 1. Ensure you have Flutter installed
-2. Ensure you have either the Android or iOS sdk
+2. Ensure you have either the Android or iOS sdk and either a device or device emulator loaded
 3. Clone this repository
 4. run 'flutter pub get' in the project folder to download the necessary dependencies
+5. Run the app with flutter run (note that this must be deployed to an actual device to detect nearby Bluetooth devices)
