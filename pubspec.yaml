@@ -17,6 +17,7 @@ dev_dependencies:
   liquid_progress_indicator: ^0.3.2
   vibrate: ^0.0.4
   flutter_launcher_icons: "^0.8.0"
+  beacon_broadcast: ^0.2.1
 
 flutter_icons:
     image_path: "assets/images/safmpng.png"
