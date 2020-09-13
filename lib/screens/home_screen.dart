@@ -13,10 +13,10 @@ class HomeScreen extends StatefulWidget {
   HomeScreen({Key key, @required this.preferences}) : super (key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
 
   static const String METRIC_KEY = 'usingMetric';
   bool isScanning = false;
