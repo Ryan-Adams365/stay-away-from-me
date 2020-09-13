@@ -45,12 +45,18 @@ Widget decideWidget(final Translations translations, BuildContext context){
           mainAxisAlignment: MainAxisAlignment.center,
           children: 
           [
-            Text('Ft'),
-            Switch(
-              value: homeState.metricMode,
-              onChanged: (value) => homeState.toggleMetric(value),
+            Text('Ft', textScaleFactor: 1.3,),
+            Transform.scale(
+              scale: 1.2,
+              child: Switch(value: homeState.metricMode,
+                onChanged: (value) => homeState.toggleMetric(value),
+                activeColor: Colors.orange,
+                inactiveThumbColor: Colors.blue[700],
+                inactiveTrackColor: Colors.white,
+              ),
             ),
-            Text('Meters')
+              
+            Text('Meters', textScaleFactor: 1.3)
           ], 
         ),
       ],
@@ -66,9 +72,6 @@ Widget decideWidget(final Translations translations, BuildContext context){
           stackedText(translations, 'prompt'),
       ],
     );
-    
-    
-    Center(child: stackedText(translations, 'prompt'),);
   }
 }
 
