@@ -20,7 +20,7 @@ double getPaddingAmount(BuildContext context, double factor, bool usingWidth) {
 */
 double convertToDistance(int rssi){
   double measuredPower = -74.0;
-  double N = 3.0;
+  double N = 2.0;
 
   return pow(10, ((measuredPower-rssi)/(10*N)));
 }
