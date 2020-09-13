@@ -32,14 +32,29 @@ double convertToDistance(int txPowerLevel){
     given if less than or equal to min dist, or 0 if 
     greater than or equal to max dist
 */
-double convertDistToStrength(double distance, double minDist, double maxDist){
-  if(distance <= minDist){
-    return 1;
-  } else if(distance > maxDist){
+double convertDistToStrength(double distance){
+  if (distance < 4)
+    return 1.0;
+  if (distance < 4.5)
+    return 0.9;
+  if (distance < 5)
+    return 0.8;
+  if (distance < 6)
+    return 0.7;
+  if (distance < 7)
+    return 0.6;
+  if (distance < 8)
+    return 0.5;
+  if (distance < 9)
+    return 0.4;
+  if (distance < 10)
+    return 0.3;
+  if (distance < 11)
+    return 0.2;
+  if (distance < 12)
+    return 0.1;
+  if (distance >= 12)
     return 0;
-  } else{
-    return scaleValue(distance, minDist, maxDist);
-  }
 }
 
 /*

@@ -9,18 +9,18 @@ import 'package:stay_away_from_me/models/translations.dart';
 class Progress extends StatelessWidget {
   bool usingMetric = false;
   final List<Device> deviceList;
+  final double prevSignalStrength;
 
-  Progress({this.deviceList});
+  Progress({this.deviceList, this.prevSignalStrength});
   
   @override
   Widget build(BuildContext context) {
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
     final double minDistance = getMinDistance(deviceList);
+    final double signalStrength = convertDistToStrength(minDistance);
 
-    final double signalStrength = convertDistToStrength(minDistance, 1.83, 6);
-
-    vibrateIfClose(minDistance);
+    //vibrateIfClose(minDistance);
     return LiquidLinearProgressIndicator(
       value: signalStrength, 
       valueColor: AlwaysStoppedAnimation(colorMap(signalStrength)),
