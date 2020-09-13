@@ -33,7 +33,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
               snapshot.data.device.connect();
             }
 
-            if (snapshot.data.device.name.contains('iPhone')) {
+            if (snapshot.data.device.name.contains('iPhone') || snapshot.data.device.name.contains('Android')) {
               var newDevice = true;
               var toRemove = [];
               var signal = new Device(
