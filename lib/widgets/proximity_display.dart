@@ -4,32 +4,16 @@ import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/widgets/progress.dart';
 
-class ProximityDisplay extends StatefulWidget {
-  
-  @override
-  _ProximityDisplayState createState() => _ProximityDisplayState();
-}
-
-class _ProximityDisplayState extends State<ProximityDisplay> {
-
-  Stream<List<ScanResult>> _results;
-
-  @override
-  void initState() {
-    super.initState();
-    FlutterBlue.instance.scan(timeout: Duration(seconds: 2));
-    _results = FlutterBlue.instance.scanResults;
-  }
+class ProximityDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    FlutterBlue flutterBlue;
+    flutterBlue.scan(timeout: Duration(seconds: 2));
+    recursiveScanning(flutterBlue);
+
+    Stream<List<ScanResult>> _results = flutterBlue.scanResults;
     final Translations translations = Translations(locale: Localizations.localeOf(context));
-    FlutterBlue.instance.startScan(timeout:Duration(seconds: 2)).then((results) {
-      setState() {
-        _results = FlutterBlue.instance.scanResults;
-      }
-    });
 
     return Center(
       child: StreamBuilder<List<ScanResult>>(
@@ -74,14 +58,19 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
   }
 }
 
+void recursiveScanning(FlutterBlue flutterBlue) {
+  flutterBlue.startScan(timeout: Duration(seconds: 2)).then((results) {
+    recursiveScanning(flutterBlue);
+  });
+}
+
 List<ScanResult> filterResults(List<ScanResult> results) {
   List<ScanResult> filteredResults = [];
   final String filterKey = 'iPhone';
 
   results.forEach((element) {
     if (element.advertisementData.connectable) {
-      element.device.connect();
-      element.device.disconnect();
+      element.device.connect(timeout: Duration(seconds: 2));
       if (element.device.name.contains(filterKey)) {
         filteredResults.add(element);
       }
@@ -90,3 +79,4 @@ List<ScanResult> filterResults(List<ScanResult> results) {
 
   return filteredResults;
 }
+
