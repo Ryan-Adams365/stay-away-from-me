@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stay_away_from_me/screens/bluetooth_off_screen.dart';
 import 'package:stay_away_from_me/screens/home_screen.dart';
 
 class App extends StatelessWidget {
   
+  final SharedPreferences preferences;
+
+  App({Key key, @required this.preferences}) : super (key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class App extends StatelessWidget {
         builder: (context, snapshot) {
           final state = snapshot.data;
           if (state == BluetoothState.on) {
-            return HomeScreen();
+            return HomeScreen(preferences: preferences);
           }
           return BluetoothOffScreen(state: state);
         }

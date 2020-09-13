@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/widgets/prompt.dart';
 import 'package:stay_away_from_me/widgets/proximity_display.dart';
 
 class HomeScreen extends StatefulWidget {
+  
+  final SharedPreferences preferences;
+
+  HomeScreen({Key key, @required this.preferences}) : super (key: key);
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
 
+  static const String METRIC_KEY = 'usingMetric';
   bool isScanning = false;
+
+  bool get metricMode => widget.preferences.getBool(METRIC_KEY) ?? true;
+
+  void toggleMetric(bool val){  
+    setState(() {
+      widget.preferences.setBool(METRIC_KEY, val);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               }),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: positionButton(context),
         body: Padding(
           padding: EdgeInsets.only(
               left: getPaddingAmount(context, 0.05, true),
@@ -53,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 }
-
 
 String decideButtonText(bool isScanning, Translations translations) 
   => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
@@ -65,3 +79,10 @@ bool toggleScan(bool isScanning, FlutterBlue flutterBlue){
   } 
   return true;
 } 
+
+FloatingActionButtonLocation positionButton(BuildContext context){
+  if(MediaQuery.of(context).orientation != Orientation.portrait){
+    return FloatingActionButtonLocation.endDocked;
+  }
+  return FloatingActionButtonLocation.centerDocked;
+}

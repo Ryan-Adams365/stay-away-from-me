@@ -4,16 +4,20 @@ import 'package:vibrate/vibrate.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/device.dart';
 import 'package:stay_away_from_me/models/translations.dart';
+import 'package:stay_away_from_me/screens/home_screen.dart';
+
 
 
 class Progress extends StatelessWidget {
-  bool usingMetric = false;
-  final List<Device> deviceList;
 
+  final List<Device> deviceList;
   Progress({this.deviceList});
   
   @override
   Widget build(BuildContext context) {
+    
+    HomeScreenState homeState = context.findAncestorStateOfType<HomeScreenState>();
+    bool usingMetric = homeState.metricMode;
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
     final double minDistance = getMinDistance(deviceList);

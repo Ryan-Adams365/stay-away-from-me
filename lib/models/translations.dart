@@ -15,7 +15,9 @@ class Translations{
       'meters': 'meters',
       'scanning': 'Scanning for devices...',
       'errorScanning': 'Error scanning for devices...',
-      'bluetooth': 'Must enable Bluetooth to scan for other devices'
+      'bluetooth': 'Must enable Bluetooth to scan for other devices',
+      'prompt': 'To start searching for nearby devices, press Scan',
+      'welcome': 'Welcome to Stay Away From Me!'
     },
 
     'es': {
@@ -28,7 +30,8 @@ class Translations{
       'scanning': 'Buscando dispositivos...',
       'errorScanning': 'Error al buscar dispositivos...',
       'bluetooth': 'Debe habilitar Bluetooth para buscar otros dispositivos',
-
+      'prompt': 'Para comenzar a buscar dispositivos cercanos, presione Escanear',
+      'welcome': '¡Bienvenido a Stay Away From Me!'
     },
 
     'cn': {
@@ -41,6 +44,8 @@ class Translations{
       'scanning': '扫描设备...',
       'errorScanning': '扫描设备时出错...',
       'bluetooth': '必须启用蓝牙才能扫描其他设备',
+      'prompt': '要开始搜索附近的设备，请按扫描',
+      'welcome': '欢迎远离我！',
     },
 
     'ru': {
@@ -53,7 +58,8 @@ class Translations{
       'scanning': 'Поиск устройств...',
       'errorScanning': 'Ошибка сканирования устройств...',
       'bluetooth': 'Необходимо включить Bluetooth для поиска других устройств',
-
+      'prompt': 'Чтобы начать поиск устройств поблизости, нажмите Сканировать',
+      'welcome': 'Добро пожаловать, чтобы держаться подальше от меня!',
     },
 
     'dap': {
@@ -66,9 +72,12 @@ class Translations{
       'scanning': 'उपकरणों के लिए स्कैनिंग...',
       'errorScanning': 'उपकरणों के लिए स्कैनिंग में त्रुटि...',
       'bluetooth': 'अन्य उपकरणों के लिए स्कैन करने के लिए ब्लूटूथ को सक्षम करना चाहिए',
+      'prompt': 'आस-पास के उपकरणों की खोज शुरू करने के लिए, स्कैन दबाएं',
+      'welcome': 'मेरे से दूर रहने के लिए आपका स्वागत है!',
     },
   };
 
   String getTranslation(String label) => labels[window.locale.languageCode][label];
+  String getLanguageCode() => window.locale.languageCode;
 }
 
