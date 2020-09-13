@@ -33,20 +33,35 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
               snapshot.data.device.connect();
             }
 
-            var signal = new Device(
-              snapshot.data.rssi,
-              snapshot.data.device.id.toString(),
-              snapshot.data.device.name,
-            );
+            if (snapshot.data.device.name == '[TV]') {
+              var newDevice = true;
+              var toRemove = [];
+              var signal = new Device(
+                snapshot.data.rssi,
+                snapshot.data.device.id.toString(),
+                snapshot.data.device.name,
+                0
+              );
 
-            deviceList.forEach((element) {
-              if (element.id == signal.id) {
-                deviceList.remove(element);
+              deviceList.forEach((element) {
+                if (element.id == signal.id) {
+                  element.rssi = signal.rssi;
+                  element.name = signal.name;
+                  newDevice = false;
+                } else {
+                  element.staleCounter++;
+                  if (element.staleCounter > 50) {
+                    toRemove.add(element);
+                  }
+                }
+              });
+
+              deviceList.removeWhere((element) => toRemove.contains(element));
+
+              if (newDevice) {
+                deviceList.add(signal);
               }
-            });
-            
-            //if (signal.name == 'iPhone')
-            deviceList.add(signal);
+            }
           }
 
           if (deviceList.isEmpty) {
@@ -65,6 +80,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
           }
 
           return Column(
+
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('${deviceList.length} ${translations.getTranslation('nearDevs')}', textScaleFactor: 1.5),
