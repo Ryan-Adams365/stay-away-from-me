@@ -51,11 +51,24 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.only(
               left: getPaddingAmount(context, 0.05, true),
               right: getPaddingAmount(context, 0.05, true)),
-          child: isScanning ? ProximityDisplay(results: flutterBlue.scan(allowDuplicates: true)) : Prompt(),
+          child: chooseDisplay(isScanning, flutterBlue, beaconBroadcast)
         ));
   }
 }
 
+Widget chooseDisplay(bool isScanning, FlutterBlue flutterBlue, BeaconBroadcast beaconBroadcast) {
+  if (!isScanning) {
+    beaconBroadcast
+      .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
+      .setMajorId(1)
+      .setMinorId(100)
+      .setTransmissionPower(-69)
+      .start();
+    return ProximityDisplay(results: flutterBlue.scan(allowDuplicates: true));
+  } else {
+    return Prompt();
+  }
+}
 
 String decideButtonText(bool isScanning, Translations translations) 
   => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
@@ -66,11 +79,5 @@ bool toggleScan(bool isScanning, FlutterBlue flutterBlue, BeaconBroadcast beacon
     flutterBlue.stopScan();
     return false;
   } 
-  beaconBroadcast
-    .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
-    .setMajorId(1)
-    .setMinorId(100)
-    .setTransmissionPower(-69)
-    .start();
   return true;
 } 
