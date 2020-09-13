@@ -28,12 +28,12 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
         stream: results,
         builder: (context, snapshot) {
           
-          if (!snapshot.hasError || snapshot.hasData){
+          if (!snapshot.hasError && snapshot.hasData){
             if (snapshot.data.device.name.length < 1 && snapshot.data.advertisementData.connectable) {
               snapshot.data.device.connect();
             }
 
-            if (snapshot.data.device.name == '[TV]') {
+            if (snapshot.data.device.name.contains('iPhone')) {
               var newDevice = true;
               var toRemove = [];
               var signal = new Device(
