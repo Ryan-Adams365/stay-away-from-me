@@ -5,6 +5,14 @@ class Translations{
 
   Translations({this.locale});
 
+  final supportedLanguages = [
+    'en',
+    'es',
+    'cn',
+    'ru',
+    'dap'
+  ];
+
   final labels = {
     'en': {
       'appTitle' : 'Stay Away From Me',
@@ -77,7 +85,22 @@ class Translations{
     },
   };
 
-  String getTranslation(String label) => labels[window.locale.languageCode][label];
+  String getTranslation(String label){
+    final String languageCode = window.locale.languageCode;
+
+    if(isSupported(languageCode)){
+      return labels[languageCode][label];
+    } 
+    return labels['en'][label]; // if not supported default at English
+  } 
+
   String getLanguageCode() => window.locale.languageCode;
+
+  bool isSupported(final String language){
+    if(supportedLanguages.contains(language)){
+      return true;
+    }
+    return false;
+  }
 }
 
