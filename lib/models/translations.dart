@@ -15,6 +15,7 @@ class Translations{
       'meters': 'meters',
       'scanning': 'Scanning for devices...',
       'errorScanning': 'Error scanning for devices...',
+      'bluetooth': 'Must enable Bluetooth to scan for other devices'
     },
 
     'es': {
@@ -26,6 +27,8 @@ class Translations{
       'meters': 'metros',
       'scanning': 'Buscando dispositivos...',
       'errorScanning': 'Error al buscar dispositivos...',
+      'bluetooth': 'Debe habilitar Bluetooth para buscar otros dispositivos',
+
     },
 
     'cn': {
@@ -37,6 +40,7 @@ class Translations{
       'meters': '米',
       'scanning': '扫描设备...',
       'errorScanning': '扫描设备时出错...',
+      'bluetooth': '必须启用蓝牙才能扫描其他设备',
     },
 
     'ru': {
@@ -48,6 +52,8 @@ class Translations{
       'meters': 'метры',
       'scanning': 'Поиск устройств...',
       'errorScanning': 'Ошибка сканирования устройств...',
+      'bluetooth': 'Необходимо включить Bluetooth для поиска других устройств',
+
     },
 
     'dap': {
@@ -59,6 +65,7 @@ class Translations{
       'meters': 'मीटर की दूरी पर',
       'scanning': 'उपकरणों के लिए स्कैनिंग...',
       'errorScanning': 'उपकरणों के लिए स्कैनिंग में त्रुटि...',
+      'bluetooth': 'अन्य उपकरणों के लिए स्कैन करने के लिए ब्लूटूथ को सक्षम करना चाहिए',
     },
   };
 
