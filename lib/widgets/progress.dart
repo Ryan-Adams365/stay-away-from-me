@@ -18,6 +18,7 @@ class Progress extends StatelessWidget {
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
     final double minDistance = getMinDistance(deviceList);
+    final int minRssi = getMinRssi(deviceList);
     final double signalStrength = convertDistToStrength(metersToFt(minDistance));
 
     //vibrateIfClose(minDistance);
@@ -29,7 +30,7 @@ class Progress extends StatelessWidget {
       borderWidth: 1.0,
       borderRadius: 12.0,
       direction: Axis.vertical, 
-      center: deviceList.isNotEmpty ? distanceText(translations, minDistance, usingMetric) : Text(translations.getTranslation('scanning'), textScaleFactor: 1.2,),
+      center: deviceList.isNotEmpty ? distanceText(translations, minDistance, usingMetric, minRssi) : Text(translations.getTranslation('scanning'), textScaleFactor: 1.2,),
     );
   }
 }
@@ -58,6 +59,18 @@ double getMinDistance(List<Device> deviceList){
   return minDistance;
 }
 
+int getMinRssi(List<Device> deviceList){
+  var minRssi = -999;
+  deviceList.forEach((device) {
+    if(device.rssiAvg != null) {
+      if (device.rssiAvg < minRssi) {
+        minRssi = device.rssiAvg;
+      }
+    }
+  });
+  return minRssi;
+}
+
 void vibrateIfClose(double signalStrength) async {
   if(signalStrength >= 0.7){
     bool canVibrate = await Vibrate.canVibrate;
@@ -76,10 +89,10 @@ void vibrateIfClose(double signalStrength) async {
   }
 }
 
-Text distanceText(Translations translations, double distance, bool usingMetric){
+Text distanceText(Translations translations, double distance, bool usingMetric, int minRssi){
   if(usingMetric){
     return Text(
-      "${translations.getTranslation('distance')} ${distance.toStringAsFixed(2)} ${translations.getTranslation('meters')}",
+      "${translations.getTranslation('distance')} ${distance.toStringAsFixed(2)} ${translations.getTranslation('meters')} ($minRssi)",
       textScaleFactor: 1.2
     );
   }
