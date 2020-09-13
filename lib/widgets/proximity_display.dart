@@ -27,8 +27,8 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
       child: StreamBuilder<ScanResult>(
         stream: results,
         builder: (context, snapshot) {
-          
-          if (!snapshot.hasError && snapshot.hasData){
+
+          if(!snapshot.hasError && snapshot.hasData) {
             if (snapshot.data.device.name.length < 1 && snapshot.data.advertisementData.connectable) {
               snapshot.data.device.connect();
             }
@@ -37,7 +37,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
               var newDevice = true;
               var toRemove = [];
               var signal = new Device(
-                snapshot.data.rssi,
+                snapshot.data.rssi, 
                 snapshot.data.device.id.toString(),
                 snapshot.data.device.name,
                 0
@@ -63,24 +63,8 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
               }
             }
           }
-
-          if (deviceList.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  Padding(
-                    padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
-                  ),
-                  !(snapshot.hasData) ? Text(translations.getTranslation('scanning'), textScaleFactor: 1.5) : Text(translations.getTranslation('errorScanning'), textScaleFactor: 1.5)
-                ],
-              )
-            );
-          }
-
+          
           return Column(
-
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('${deviceList.length} ${translations.getTranslation('nearDevs')}', textScaleFactor: 1.5),
