@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:vibrate/vibrate.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
+import 'package:stay_away_from_me/models/device.dart';
 import 'package:stay_away_from_me/models/translations.dart';
 
 
 class Progress extends StatelessWidget {
   bool usingMetric = false;
-  final List<ScanResult> deviceList;
+  final List<Device> deviceList;
 
   Progress({this.deviceList});
   
@@ -45,7 +45,7 @@ Color colorMap(double signalStrength){
     return Colors.red;
 }
 
-double getMinDistance(List<ScanResult> deviceList){
+double getMinDistance(List<Device> deviceList){
   var minDistance = 999.9;
   deviceList.forEach((device) {
     if(device.rssi != null) {

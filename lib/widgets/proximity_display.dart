@@ -28,8 +28,28 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
         stream: results,
         builder: (context, snapshot) {
           
-          if(snapshot.hasError || !(snapshot.hasData)){
+          if (!snapshot.hasError || snapshot.hasData){
+            if (snapshot.data.device.name.length < 1 && snapshot.data.advertisementData.connectable) {
+              snapshot.data.device.connect();
+            }
 
+            var signal = new Device(
+              snapshot.data.rssi,
+              snapshot.data.device.id.toString(),
+              snapshot.data.device.name,
+            );
+
+            deviceList.forEach((element) {
+              if (element.id == signal.id) {
+                deviceList.remove(element);
+              }
+            });
+            
+            //if (signal.name == 'iPhone')
+            deviceList.add(signal);
+          }
+
+          if (deviceList.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -42,8 +62,8 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
                 ],
               )
             );
-          } 
-          deviceList.add(new Device(snapshot.data.rssi));
+          }
+
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -55,7 +75,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
                 child: FractionallySizedBox(
                   widthFactor: 0.6,
                   heightFactor: 0.7,
-                  child: Text('TESTING') //Progress(deviceList: deviceList)
+                  child: Progress(deviceList: deviceList)
                 )
               )
             ]
