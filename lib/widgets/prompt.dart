@@ -64,7 +64,13 @@ Widget decideWidget(final Translations translations, BuildContext context){
   } else{
     return Column(
       children: [
+          Padding(
+            padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+          ),
           getSizedImage('assets/images/safmpng.png'),
+          Padding(
+            padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+          ),
           stackedText(translations, 'welcome'),
           Padding(
             padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
