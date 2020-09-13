@@ -25,8 +25,21 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
       child: StreamBuilder<List<ScanResult>>(
         stream: results,
         builder: (context, snapshot) {
+
           if(snapshot.hasError || !(snapshot.hasData)){
-            return Center(child: CircularProgressIndicator());
+
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  Padding(
+                    padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+                  ),
+                  !(snapshot.hasData) ? Text(translations.getTranslation('scanning'), textScaleFactor: 1.5) : Text(translations.getTranslation('errorScanning'), textScaleFactor: 1.5)
+                ],
+              )
+            );
           } 
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
