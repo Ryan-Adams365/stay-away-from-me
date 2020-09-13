@@ -48,8 +48,8 @@ Color colorMap(double signalStrength){
 double getMinDistance(List<Device> deviceList){
   var minDistance = 999.9;
   deviceList.forEach((device) {
-    if(device.rssi != null) {
-      var deviceDistance = convertToDistance(device.rssi);
+    if(device.rssiAvg != null) {
+      var deviceDistance = convertToDistance(device.rssiAvg);
       if (deviceDistance < minDistance) {
         minDistance = deviceDistance;
       }

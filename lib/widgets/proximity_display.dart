@@ -45,7 +45,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
 
               deviceList.forEach((element) {
                 if (element.id == signal.id) {
-                  element.rssi = signal.rssi;
+                  element.addRssiValue(signal.rssiLast);
                   element.name = signal.name;
                   newDevice = false;
                 } else {
