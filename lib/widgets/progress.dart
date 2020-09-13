@@ -19,7 +19,12 @@ class Progress extends StatelessWidget {
     final double minDistance = getMinDistance(deviceList);
 
     final double signalStrength = convertDistToStrength(minDistance, 1.83, 6);
-
+    double maxRssi = -999;
+    deviceList.forEach((element) {
+      if (element.rssiAvg > maxRssi) {
+        maxRssi = element.rssiAvg.toDouble();
+      }
+    });
     vibrateIfClose(minDistance);
     return LiquidLinearProgressIndicator(
       value: signalStrength, 
@@ -29,7 +34,7 @@ class Progress extends StatelessWidget {
       borderWidth: 1.0,
       borderRadius: 12.0,
       direction: Axis.vertical, 
-      center: deviceList.isNotEmpty ? distanceText(translations, minDistance, usingMetric) : Text(translations.getTranslation('scanning'), textScaleFactor: 1.2,),
+      center: deviceList.isNotEmpty ? distanceText(translations, maxRssi, usingMetric) : Text(translations.getTranslation('scanning'), textScaleFactor: 1.2,),
     );
   }
 }
