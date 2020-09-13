@@ -56,8 +56,12 @@ List<ScanResult> filterResults(List<ScanResult> results) {
   final String filterKey = 'iPhone';
 
   results.forEach((element) {
-    if (element.device.name.contains(filterKey)) {
-      filteredResults.add(element);
+    if (element.advertisementData.connectable) {
+      element.device.connect();
+      element.device.disconnect();
+      if (element.device.name.contains(filterKey)) {
+        filteredResults.add(element);
+      }
     }
   });
 

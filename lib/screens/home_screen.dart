@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/translations.dart';
@@ -21,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final String title = translations.getTranslation('appTitle');
     FlutterBlue flutterBlue = FlutterBlue.instance;
-    BeaconBroadcast beaconBroadcast = BeaconBroadcast();
 
     return Scaffold(
         appBar: AppBar(
@@ -42,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () {
                 setState(() {
-                  isScanning = toggleScan(isScanning, flutterBlue, beaconBroadcast);
+                  isScanning = toggleScan(isScanning, flutterBlue);
                 });
               }),
         ),
@@ -60,17 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
 String decideButtonText(bool isScanning, Translations translations) 
   => isScanning ? translations.getTranslation('stop') : translations.getTranslation('scan');
 
-bool toggleScan(bool isScanning, FlutterBlue flutterBlue, BeaconBroadcast beaconBroadcast){
+bool toggleScan(bool isScanning, FlutterBlue flutterBlue){
   if(isScanning){
-    beaconBroadcast.stop();
     flutterBlue.stopScan();
     return false;
   }
-  beaconBroadcast
-    .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
-    .setMajorId(1)
-    .setMinorId(100)
-    .start();
   flutterBlue.startScan(timeout: Duration(seconds: 4));
   return true;
 } 
