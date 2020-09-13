@@ -29,39 +29,37 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
         builder: (context, snapshot) {
           
           if (!snapshot.hasError && snapshot.hasData){
-            if (snapshot.data.device.name.length < 1 && snapshot.data.advertisementData.connectable) {
-              snapshot.data.device.connect();
-            }
-
-            if (snapshot.data.device.name.contains('iPhone')) {
-              var newDevice = true;
-              var toRemove = [];
-              var signal = new Device(
-                snapshot.data.rssi,
-                snapshot.data.device.id.toString(),
-                snapshot.data.device.name,
-                0
-              );
-
-              deviceList.forEach((element) {
-                if (element.id == signal.id) {
-                  element.addRssiValue(signal.rssiLast);
-                  element.name = signal.name;
-                  newDevice = false;
-                } else {
-                  element.staleCounter++;
-                  if (element.staleCounter > 50) {
-                    toRemove.add(element);
-                  }
+            Device match;
+            List<Device> toRemove = [];
+            deviceList.forEach((element) {
+              if (element.id == snapshot.data.device.id.toString()) {
+                match = element;
+              } else {
+                element.staleCounter++;
+                if (element.staleCounter > 75) {
+                  toRemove.add(element);
                 }
-              });
+              }
+            });
 
-              deviceList.removeWhere((element) => toRemove.contains(element));
-
-              if (newDevice) {
-                deviceList.add(signal);
+            if (match != null) {
+              match.addRssiValue(snapshot.data.rssi);
+            } else {
+              if (snapshot.data.advertisementData.connectable) {
+                snapshot.data.device.connect();
+              }
+              if (snapshot.data.device.name.contains('iPhone')) {
+                deviceList.add(new Device(
+                  snapshot.data.rssi,
+                  snapshot.data.device.id.toString(),
+                  snapshot.data.device.name,
+                  0
+                  )
+                );
               }
             }
+
+            deviceList.removeWhere((element) => toRemove.contains(element));
           }
 
           if (deviceList.isEmpty) {
