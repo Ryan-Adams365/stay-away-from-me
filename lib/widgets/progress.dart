@@ -7,17 +7,13 @@ import 'package:stay_away_from_me/models/translations.dart';
 
 
 class Progress extends StatelessWidget {
-  
+  bool usingMetric = false;
   final List<ScanResult> deviceList;
 
   Progress({this.deviceList});
   
   @override
   Widget build(BuildContext context) {
-
-    if(deviceList.isEmpty){
-      return Center(child: CircularProgressIndicator());
-    } 
 
     final Translations translations = Translations(locale: Localizations.localeOf(context));
     final double minDistance = getMinDistance(deviceList);
@@ -33,9 +29,7 @@ class Progress extends StatelessWidget {
       borderWidth: 1.0,
       borderRadius: 12.0,
       direction: Axis.vertical, 
-      center: Text(
-        "${translations.getTranslation('distance')} ${minDistance.toStringAsFixed(2)} ${translations.getTranslation('meters')}"
-      ),
+      center: deviceList.isNotEmpty ? distanceText(translations, minDistance, usingMetric) : Text(translations.getTranslation('scanning'), textScaleFactor: 1.2,),
     );
   }
 }
@@ -80,4 +74,17 @@ void vibrateIfClose(double signalStrength) async {
       }
     }
   }
+}
+
+Text distanceText(Translations translations, double distance, bool usingMetric){
+  if(usingMetric){
+    return Text(
+      "${translations.getTranslation('distance')} ${distance.toStringAsFixed(2)} ${translations.getTranslation('meters')}",
+      textScaleFactor: 1.2
+    );
+  }
+  return Text(
+    "Distance ${metersToFt(distance).toStringAsFixed(2)} ft",
+    textScaleFactor: 1.2
+  );
 }
