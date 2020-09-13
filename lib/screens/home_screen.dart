@@ -67,9 +67,10 @@ bool toggleScan(bool isScanning, FlutterBlue flutterBlue, BeaconBroadcast beacon
     return false;
   } 
   beaconBroadcast
-    .setUUID('')
+    .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
     .setMajorId(1)
     .setMinorId(100)
+    .setTransmissionPower(-69)
     .start();
   return true;
 } 
