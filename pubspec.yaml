@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
   flutter_blue: ^0.7.2  
   cupertino_icons: ^0.1.3
+  google_fonts: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +26,11 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+  fonts:
+   - family: LexendPeta
+     fonts:
+      - asset: assets/fonts/LexendPeta-Regular.ttf
+
   assets:
     - assets/images/safmpng.png
   
