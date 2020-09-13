@@ -28,6 +28,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
           if(snapshot.hasError || !(snapshot.hasData)){
             return Center(child: CircularProgressIndicator());
           } 
+          final List<ScanResult> filteredResults = filterResults(snapshot.data);
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,7 +40,7 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
                 child: FractionallySizedBox(
                   widthFactor: 0.6,
                   heightFactor: 0.7,
-                  child: Progress(deviceList: snapshot.data)
+                  child: Progress(deviceList: filteredResults)
                 )
               )
             ]
@@ -48,4 +49,17 @@ class _ProximityDisplayState extends State<ProximityDisplay> {
       )
     );
   }
+}
+
+List<ScanResult> filterResults(List<ScanResult> results) {
+  List<ScanResult> filteredResults = [];
+  final String filterKey = 'iPhone';
+
+  results.forEach((element) {
+    if (element.device.name.contains(filterKey)) {
+      filteredResults.add(element);
+    }
+  });
+
+  return filteredResults;
 }
