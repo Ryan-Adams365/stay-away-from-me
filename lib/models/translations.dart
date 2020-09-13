@@ -12,7 +12,9 @@ class Translations{
       'scan': 'Scan',
       'nearDevs': 'Nearby Devices',
       'distance': 'Distance',
-      'meters': 'meters' 
+      'meters': 'meters',
+      'scanning': 'Scanning for devices...',
+      'errorScanning': 'Error scanning for devices...',
     },
 
     'es': {
@@ -21,7 +23,9 @@ class Translations{
       'scan': 'Escanear',
       'nearDevs': 'Dispositivos Cercanos',
       'distance': 'Distancia',
-      'meters': 'metros' 
+      'meters': 'metros',
+      'scanning': 'Buscando dispositivos...',
+      'errorScanning': 'Error al buscar dispositivos...',
     },
 
     'cn': {
@@ -30,7 +34,9 @@ class Translations{
       'scan': '扫瞄',
       'nearDevs': '附近的设备',
       'distance': '距离',
-      'meters': '米' 
+      'meters': '米',
+      'scanning': '扫描设备...',
+      'errorScanning': '扫描设备时出错...',
     },
 
     'ru': {
@@ -39,7 +45,9 @@ class Translations{
       'scan': 'Поиск',
       'nearDevs': 'Устройства Поблизости',
       'distance': 'Расстояние',
-      'meters': 'метры' 
+      'meters': 'метры',
+      'scanning': 'Поиск устройств...',
+      'errorScanning': 'Ошибка сканирования устройств...',
     },
 
     'dap': {
@@ -48,7 +56,9 @@ class Translations{
       'scan': 'स्कैन',
       'nearDevs': 'निकट के उपकरण',
       'distance': 'दूरी',
-      'meters': 'मीटर की दूरी पर' 
+      'meters': 'मीटर की दूरी पर',
+      'scanning': 'उपकरणों के लिए स्कैनिंग...',
+      'errorScanning': 'उपकरणों के लिए स्कैनिंग में त्रुटि...',
     },
   };
 
