@@ -69,6 +69,6 @@ class Translations{
     },
   };
 
-  String getTranslation(String label) => labels[locale.languageCode][label];
+  String getTranslation(String label) => labels[window.locale.languageCode][label];
 }
 
