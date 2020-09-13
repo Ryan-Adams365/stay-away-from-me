@@ -59,7 +59,7 @@ class HomeScreenState extends State<HomeScreen> {
                 });
               }),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: positionButton(context),
         body: Padding(
           padding: EdgeInsets.only(
               left: getPaddingAmount(context, 0.05, true),
@@ -79,3 +79,10 @@ bool toggleScan(bool isScanning, FlutterBlue flutterBlue){
   } 
   return true;
 } 
+
+FloatingActionButtonLocation positionButton(BuildContext context){
+  if(MediaQuery.of(context).orientation != Orientation.portrait){
+    return FloatingActionButtonLocation.endDocked;
+  }
+  return FloatingActionButtonLocation.centerDocked;
+}

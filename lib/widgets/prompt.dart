@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stay_away_from_me/functions/functions.dart';
 import 'package:stay_away_from_me/models/translations.dart';
 import 'package:stay_away_from_me/screens/home_screen.dart';
 
@@ -28,7 +29,18 @@ Widget decideWidget(final Translations translations, BuildContext context){
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        stackedText(),
+        getSizedImage('assets/images/safmpng.png'),
+        Padding(
+          padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+        ),
+        stackedText(translations, 'welcome'),
+        Padding(
+          padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+        ),
+        stackedText(translations, 'prompt'),
+        Padding(
+          padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: 
@@ -40,40 +52,62 @@ Widget decideWidget(final Translations translations, BuildContext context){
             ),
             Text('Meters')
           ], 
-        )
+        ),
       ],
     );
   } else{
-    return Center(child: stackedText(),);
+    return Column(
+      children: [
+          getSizedImage('assets/images/safmpng.png'),
+          stackedText(translations, 'welcome'),
+          Padding(
+            padding: EdgeInsets.all(getPaddingAmount(context, 0.01, false))
+          ),
+          stackedText(translations, 'prompt'),
+      ],
+    );
+    
+    
+    Center(child: stackedText(translations, 'prompt'),);
   }
 }
 
-Stack stackedText(){
+Stack stackedText(final Translations translations, final String textLabel){
   return Stack (
     children: <Widget>[
       // Stroked text as border.
       Text(
-        'To start searching for nearby devices, press Scan.',
+        translations.getTranslation(textLabel),
         style:
           TextStyle (
           fontFamily: 'LexendPeta',
-          fontSize: 30,
           foreground: Paint()
             ..style = PaintingStyle.stroke
-            ..strokeWidth = 6
+            ..strokeWidth = 2
             ..color = Colors.blue[700],
-          ),  
+          ), 
+          textScaleFactor: 1.5, 
       ), 
       // Solid text as fill.
       Text(
-        'To start searching for nearby devices, press Scan.',
+        translations.getTranslation(textLabel),
         style:
           TextStyle (
           fontFamily: 'LexendPeta',
-          fontSize: 30,
           color: Colors.grey[300],
           ),
+          textScaleFactor: 1.5, 
       ),
     ],
+  );
+}
+
+Flexible getSizedImage(final String assetName){
+  return Flexible(
+    child: FractionallySizedBox(
+      heightFactor: 0.5,
+      widthFactor: 0.5,
+      child: Image.asset(assetName),
+    ),
   );
 }
