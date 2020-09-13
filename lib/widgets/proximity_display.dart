@@ -6,24 +6,34 @@ import 'package:stay_away_from_me/widgets/progress.dart';
 
 class ProximityDisplay extends StatefulWidget {
   
-  Stream<List<ScanResult>> results;
-  ProximityDisplay({this.results});
-
   @override
   _ProximityDisplayState createState() => _ProximityDisplayState();
 }
 
 class _ProximityDisplayState extends State<ProximityDisplay> {
 
+  Stream<List<ScanResult>> _results;
+
+  @override
+  void initState() {
+    super.initState();
+    FlutterBlue.instance.scan(timeout: Duration(seconds: 2));
+    _results = FlutterBlue.instance.scanResults;
+  }
+
   @override
   Widget build(BuildContext context) {
     
     final Translations translations = Translations(locale: Localizations.localeOf(context));
-    Stream<List<ScanResult>> results = widget.results;
+    FlutterBlue.instance.startScan(timeout:Duration(seconds: 2)).then((results) {
+      setState() {
+        _results = FlutterBlue.instance.scanResults;
+      }
+    });
 
     return Center(
       child: StreamBuilder<List<ScanResult>>(
-        stream: results,
+        stream: _results,
         builder: (context, snapshot) {
 
           if(snapshot.hasError || !(snapshot.hasData)){
