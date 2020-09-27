@@ -1,6 +1,6 @@
 # Title
 Stay Away From Me <br>
-Project for BeaverHacks Fall 2020.
+1st Place Winner for BeaverHacks Fall 2020.
 
 # Authors:
 Ryan Adams <br>
